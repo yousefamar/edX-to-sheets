@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/yousefamar/edX2sheets#readme",
   "dependencies": {
-    "googleapis": "^39.2.0"
+    "bent": "^7.1.2",
+    "googleapis": "^39.2.0",
+    "rss-parser": "^3.7.6"
   }
 }
