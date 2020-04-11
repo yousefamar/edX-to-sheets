@@ -1,0 +1,27 @@
+{
+  "name": "edx2sheets",
+  "version": "1.0.0",
+  "description": "A script that pulls the list of courses off of edX and pushes them to Google Sheets",
+  "main": "populate-sheet.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yousefamar/edX2sheets.git"
+  },
+  "keywords": [
+    "scrape",
+    "edx",
+    "google",
+    "sheets",
+    "courses",
+    "crawl"
+  ],
+  "author": "Yousef Amar <yousef@amar.io> (http://yousefamar.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yousefamar/edX2sheets/issues"
+  },
+  "homepage": "https://github.com/yousefamar/edX2sheets#readme"
+}
