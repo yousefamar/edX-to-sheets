@@ -43,6 +43,45 @@ const getStaff = async () => {
 
 	console.log(staff.length, 'staff');
 
+	/*
+	const apiKeys = require('./api-keys.json');
+
+	for (let s of staff) {
+		if (s.email || !s.position)
+			continue;
+
+		let getDomain = bent('http://universities.hipolabs.com/search?name=', 'json');
+
+
+		//let getEmail  = bent('https://api.hunter.io/v2/email-finder?api_key=' + apiKeys.hunter, 'json', 200, 400);
+		let getEmail  = bent('https://api.uplead.com/v2/person-search?', { 'Authorization': apiKeys.uplead }, 'json', 200, 400);
+
+		let domain = await getDomain(s.position.organizationName);
+
+		if (domain.length < 1) {
+			console.log('No domain');
+			continue;
+		}
+
+		domain = domain[0].domains[0];
+
+		let email = await getEmail(`&first_name=${encodeURIComponent(s.givenName.split(' ')[0])}&last_name=${encodeURIComponent(s.familyName)}&domain=${encodeURIComponent(domain)}`);
+
+		if (email.data == null) {
+			console.log('No email');
+			continue;
+		}
+
+		email = email.data.email;
+		s.email = email;
+		console.log(email);
+	}
+
+	fs.writeFileSync('staff.json', JSON.stringify(staff, null, '\t') + '\n');
+
+	return;
+	*/
+
 	let rows = staff.map(s => [
 			`=IMAGE("${s.profileImageUrl}")`,
 			s.givenName,
