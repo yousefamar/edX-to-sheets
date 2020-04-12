@@ -52,9 +52,8 @@ const getStaff = async () => {
 
 		let getDomain = bent('http://universities.hipolabs.com/search?name=', 'json');
 
-
-		//let getEmail  = bent('https://api.hunter.io/v2/email-finder?api_key=' + apiKeys.hunter, 'json', 200, 400);
-		let getEmail  = bent('https://api.uplead.com/v2/person-search?', { 'Authorization': apiKeys.uplead }, 'json', 200, 400);
+		let getEmail  = bent('https://api.hunter.io/v2/email-finder?api_key=' + apiKeys.hunter1, 'json', 200, 400);
+		//let getEmail  = bent('https://api.uplead.com/v2/person-search?', { 'Authorization': apiKeys.uplead }, 'json', 200, 400);
 
 		let domain = await getDomain(s.position.organizationName);
 
@@ -67,6 +66,7 @@ const getStaff = async () => {
 
 		let email = await getEmail(`&first_name=${encodeURIComponent(s.givenName.split(' ')[0])}&last_name=${encodeURIComponent(s.familyName)}&domain=${encodeURIComponent(domain)}`);
 
+		//if (email.statusCode === 400) {
 		if (email.data == null) {
 			console.log('No email');
 			continue;
@@ -74,10 +74,8 @@ const getStaff = async () => {
 
 		email = email.data.email;
 		s.email = email;
-		console.log(email);
+		fs.writeFileSync('staff.json', JSON.stringify(staff, null, '\t') + '\n');
 	}
-
-	fs.writeFileSync('staff.json', JSON.stringify(staff, null, '\t') + '\n');
 
 	return;
 	*/
@@ -88,7 +86,8 @@ const getStaff = async () => {
 			s.familyName,
 			`=HYPERLINK("https://www.edx.org/bio/${s.slug}","EdX bio")`,
 			s.position ? s.position.title: '',
-			s.position ? s.position.organizationName: ''
+			s.position ? s.position.organizationName: '',
+			s.email ? `=HYPERLINK("mailto:${s.email}","Email")` : ''
 		]);
 
 	let header = [
@@ -97,7 +96,8 @@ const getStaff = async () => {
 		'Surname',
 		'EdX bio',
 		'Title',
-		'Organisation'
+		'Organisation',
+		'Contact'
 	];
 	rows.unshift(header);
 
